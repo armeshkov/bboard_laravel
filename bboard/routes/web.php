@@ -14,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\BbsController::class, 'index']);
+Route::get('/{bb}', [\App\Http\Controllers\BbsController::class, 'detail']);
