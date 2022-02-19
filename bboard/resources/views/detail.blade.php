@@ -5,5 +5,5 @@
 @section('main')
     <p>{{ $bb->content }}</p>
     <p>{{ $bb->price }}</p>
-    <p><a href="/">На перечень объявлений</a></p>
+    <p><a href="{{ route('index') }}">На перечень объявлений</a></p>
 @endsection('main)
