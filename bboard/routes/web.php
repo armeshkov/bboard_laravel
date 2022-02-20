@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +18,6 @@ Route::get('/', [\App\Http\Controllers\BbsController::class, 'index'])->name('in
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home/add', [HomeController::class, 'showAddBbForm'])->name('bb.add');
+Route::post('/home', [HomeController::class, 'storeBb'])->name('bb.store');
 Route::get('/{bb}', [\App\Http\Controllers\BbsController::class, 'detail'])->name('detail');
