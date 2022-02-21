@@ -8,6 +8,19 @@ use App\Models\Bb;
 
 class HomeController extends Controller
 {
+    private const BB_VALIDATOR = [
+        'title' => 'required|max:50',
+        'content' => 'required',
+        'price' => 'required|numeric'
+    ];
+
+    private const BB_ERROR_MESSAGES = [
+        'price.required' => 'Раздавать товары бесплатно нельзя',
+        'required' => 'Заполните это поле',
+        'max' => 'Значение не должно быть длиннее :max символов',
+        'numeric' => 'Введите число'
+    ];
+
     /**
      * Create a new controller instance.
      *
@@ -33,7 +46,9 @@ class HomeController extends Controller
     }
 
     public function storeBb(Request $request){
-        Auth::user()->bbs()->create(['title' => $request->title, 'content' => $request->content, 'price' => $request->price]);
+        $validated = $request->validate(self::BB_VALIDATOR,
+                                        self::BB_ERROR_MESSAGES);
+        Auth::user()->bbs()->create(['title' => $validated['title'], 'content' => $validated['content'], 'price' => $validated['price']]);
         return redirect()->route('home');
     }
 
@@ -42,7 +57,9 @@ class HomeController extends Controller
     }
 
     public function updateBb(Request $request, Bb $bb) {
-        $bb->fill(['title' => $request->title, 'content' => $request->content, 'price' => $request->price]);
+        $validated = $request->validate(self::BB_VALIDATOR,
+            self::BB_ERROR_MESSAGES);
+        $bb->fill(['title' => $validated['title'], 'content' => $validated['content'], 'price' => $validated['price']]);
         $bb->save();
         return redirect()->route('home');
     }
