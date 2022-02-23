@@ -32,6 +32,20 @@
             </span>
             @enderror
         </div>
+
+        <div class="form-group">
+            <select name="rubric_id" class="form-select my-3 @error('rubric_id') is-invalid @enderror" aria-label="Выбор категории">
+                <option selected>Выберите категорию</option>
+                @foreach($rubrics as $rubric)
+                <option value="{{ $rubric->id }}">{{ $rubric->name }}</option>
+                @endforeach
+            </select>
+            @error('rubric_id')
+            <span class="invalid-feedback">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
         <input type="submit" class="btn btn-primary" value="Добавить">
     </form>
 
