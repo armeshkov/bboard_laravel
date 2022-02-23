@@ -13,6 +13,6 @@ class Bb extends Model
     }
 
     public function rubrics() {
-        return $this->belongsToMany(Rubric::class);
+        return $this->belongsTo(Rubric::class);
     }
 }

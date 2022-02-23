@@ -9,6 +9,6 @@ class Rubric extends Model
     protected $fillable = ['name'];
 
     public function bbs() {
-        return $this->belongsToMany(Bb::class);
+        return $this->hasMany(Bb::class);
     }
 }

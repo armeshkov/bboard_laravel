@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class BbRubric extends Migration
+class ForeignIdOfRubricsInBbsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class BbRubric extends Migration
      */
     public function up()
     {
-        Schema::create('bb_rubric', function (Blueprint $table) {
-            $table->foreignId('bb_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('rubric_id')->constrained()->cascadeOnDelete();
+        Schema::table('bbs', function (Blueprint $table) {
+            $table->foreignId('rubric_id')->nullable()->constrained()->cascadeOnDelete();
         });
     }
 
@@ -26,6 +25,8 @@ class BbRubric extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bb_rubric');
+        Schema::table('bbs', function (Blueprint $table) {
+            //
+        });
     }
 }
